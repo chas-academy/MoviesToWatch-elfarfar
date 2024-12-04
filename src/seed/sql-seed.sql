@@ -1,0 +1,12 @@
+CREATE DATABASE moviestodo;
+
+USE moviestodo;
+
+CREATE TABLE media (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    namn VARCHAR(255) NOT NULL,
+    typ ENUM('Movie', 'Serie') NOT NULL,
+    genre VARCHAR(50) NOT NULL,
+    sett BOOLEAN DEFAULT FALSE,
+    skapad TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
