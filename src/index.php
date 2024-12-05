@@ -1,7 +1,7 @@
 <?php 
 require'db.php';
 
-$query = $pdo->query("SELECT * FROM media ORDER BY skapad DSC");
+$query = $pdo->query("SELECT * FROM media ORDER BY skapad DESC");
 $media = $query->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
