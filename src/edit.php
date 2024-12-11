@@ -14,7 +14,7 @@ if ($action && $id) {
 
                 updateMovie($pdo, $id, $namn, $typ, $genre);
 
-                // Redirect back to index.php after updating
+                
                 header("Location: /index.php");
                 exit;
             } else {

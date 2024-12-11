@@ -15,7 +15,7 @@ $options = [
 
 try {
     $pdo = new PDO($dsn, $user, $pass, $options);
-    echo "Anslutning lyckades!";
+    echo "yes!";
 } catch (\PDOException $e) {
     die("Kunde inte ansluta till databasen: " . $e->getMessage());
 }

@@ -1,5 +1,5 @@
 <?php
-require 'db.php'; // Ensure the database connection is required first
+require 'db.php';
 
 // Function to get all movies
 function getMovies($pdo) {
