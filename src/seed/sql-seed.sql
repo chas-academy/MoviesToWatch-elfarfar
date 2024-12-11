@@ -1,14 +1,12 @@
-CREATE DATABASE moviestodo;
+CREATE DATABASE todo_list;
 
 USE moviestodo;
 
-CREATE TABLE media (
+CREATE TABLE movies (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nam VARCHAR(255) NOT NULL,
-    typ ENUM('Movie', 'Serie') NOT NULL,
-    genre VARCHAR(50) NOT NULL,
-    sett BOOLEAN DEFAULT FALSE,
-    skapad TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    name VARCHAR(255) NOT NULL,
+    type ENUM('Movie', 'Series') NOT NULL,
+    genre ENUM('Action', 'Comedy', 'Adventure', 'Horror', 'Documentary', 'War') NOT NULL,
+    seen BOOLEAN DEFAULT FALSE
 );
-
 
