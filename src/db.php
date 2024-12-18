@@ -1,9 +1,9 @@
 <?php
 
-$host = 'mariadb'; // Matcha med tjänstenamn i docker-compose.yml
-$db = 'todo_list'; // Databasnamn
-$user = 'root'; // Användarnamn i docker-compose.yml
-$pass = 'mariadb'; // Lösenord i docker-compose.yml
+$host = 'mariadb'; 
+$db = 'todo_list'; 
+$user = 'root'; 
+$pass = 'mariadb'; 
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
@@ -15,7 +15,7 @@ $options = [
 
 try {
     $pdo = new PDO($dsn, $user, $pass, $options);
-    echo "yes!";
+    
 } catch (\PDOException $e) {
     die("Kunde inte ansluta till databasen: " . $e->getMessage());
 }

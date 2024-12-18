@@ -33,7 +33,7 @@ $movies = getMovies($pdo);
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="/style/style.css?v=1.4">
+    <link rel="stylesheet" href="/style/style.css?v=1.5">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -81,8 +81,14 @@ $movies = getMovies($pdo);
                             <div>Status: <?= $item['seen'] ? 'Seen' : 'Not seen' ?></div>
                         </div>
                         <div class="item-actions">
-                            <a href="/index.php?action=toggle&id=<?= $item['id'] ?>">Toggle seen</a>
+                            <label class="switch">
+                                <a href="/index.php?action=toggle&id=<?= $item['id'] ?>">Seen</a>
+                                <input type="checkbox">
+                                <span class="slider"></span>
+
+                            </label>
                             <a href="edit.php?action=update&id=<?= $item['id'] ?>">Edit</a>
+                            
                             <a href="/index.php?action=delete&id=<?= $item['id'] ?>">Delete</a>
                         </div>
                     </li>
@@ -91,6 +97,5 @@ $movies = getMovies($pdo);
         </div>
     </div>
 </div>
-
         </body>
         </html>

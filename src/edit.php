@@ -13,8 +13,6 @@ if ($action && $id) {
                 $genre = $_POST['genre'];
 
                 updateMovie($pdo, $id, $namn, $typ, $genre);
-
-                
                 header("Location: /index.php");
                 exit;
             } else {
