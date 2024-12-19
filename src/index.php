@@ -87,7 +87,7 @@ $movies = getMovies($pdo);
                                 <span class="slider"></span>
 
                             </label>
-                            <a href="edit.php?action=update&id=<?= $item['id'] ?>">Edit</a>
+                            <a href="/edit.php?action=update&id=<?= $item['id'] ?>">Edit</a>
                             
                             <a href="/index.php?action=delete&id=<?= $item['id'] ?>">Delete</a>
                         </div>
