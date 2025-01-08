@@ -1,4 +1,4 @@
-/* Reset and global styles */
+
 * {
   margin: 0;
   padding: 0;
@@ -16,7 +16,6 @@ body {
   min-height: 100vh;
 }
 
-/* Main container for the app */
 .main {
   width: 90%;
   max-width: 1200px;
@@ -28,7 +27,7 @@ body {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Title styling */
+
 .main h1 {
   font-size: 40px;
   text-align: center;
@@ -95,7 +94,6 @@ body {
   margin-bottom: 20px;
 }
 
-/* Movie list styles */
 .list__content ul {
   list-style: none;
   padding: 0;
@@ -118,7 +116,7 @@ body {
   margin-bottom: 0;
 }
 
-/* Movie details */
+
 .item-details {
   flex-grow: 1;
 }
@@ -139,22 +137,38 @@ body {
   gap: 10px;
 }
 
-.item-actions a {
-  padding: 8px 12px;
-  font-size: 14px;
-  color: #fff;
-  background-color: #141414;
-  text-decoration: none;
-  border-radius: 4px;
-  transition: background-color 0.3s;
+
+
+.delete-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #ff0000;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-.item-actions a:hover {
-  background-color: #525252;
-  
+.delete-btn:hover {
+    background-color: #cc0000; 
 }
 
-/*SWITCH */
+.edit-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff; 
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+}
+
+.edit-btn:hover {
+    background-color: #0056b3; 
+}
+
+
 .switch {
   position: relative;
   display: inline-block;
@@ -162,14 +176,13 @@ body {
   height: 34px;
 }
 
-/* Hide default HTML checkbox */
+/*Göm Html checkbox*/
 .switch input {
   opacity: 0;
   width: 0;
   height: 0;
 }
 
-/* The slider */
 .slider {
   position: absolute;
   cursor: pointer;
@@ -208,7 +221,7 @@ input:checked + .slider:before {
   transform: translateX(26px);
 }
 
-/* Rounded sliders */
+
 .slider.round {
   border-radius: 34px;
 }

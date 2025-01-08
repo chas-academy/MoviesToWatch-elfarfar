@@ -1,7 +1,7 @@
 <?php
 require 'crud-functions.php';
 
-// Handle form submission for adding a movie
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action']) && $_GET['action'] === 'add') {
     $namn = $_POST['namn'] ?? null;
     $typ = $_POST['typ'] ?? null;
@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action']) && $_GET['ac
 
     if ($namn && $typ && $genre) {
         addMovie($pdo, $namn, $typ, $genre);
-        header("Location: /index.php"); // Redirect to avoid resubmission
+        header("Location: /index.php");  
         exit;
     }
 }
@@ -22,13 +22,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
     if ($id && is_numeric($id)) {
         if ($action === 'delete') {
             deleteMovie($pdo, $id);
-            header("Location: /index.php"); // Redirect after deletion
+            header("Location: /index.php"); 
             exit;
         }
 
         if ($action === 'toggle') {
             toggleMovieSeen($pdo, $id);
-            header("Location: /index.php"); // Redirect after toggling
+            header("Location: /index.php"); 
             exit;
         }
     }
@@ -42,7 +42,7 @@ $movies = getMovies($pdo);
 <html lang="en">
 <head>
     <link rel="stylesheet" href="/style/style.css?v=1.5">
-
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&family=Bruno+Ace+SC&family=DM+Serif+Text:ital@0;1&family=Gowun+Dodum&family=Oswald:wght@200..700&family=Teko:wght@300..700&family=Tinos:ital,wght@0,400;0,700;1,400;1,700&family=Unna:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
@@ -88,8 +88,9 @@ $movies = getMovies($pdo);
             <div>(<?= htmlspecialchars($item['type']) ?> - <?= htmlspecialchars($item['genre']) ?>)</div>
             <div>Status: <?= $item['seen'] ? 'Seen' : 'Not seen' ?></div>
         </div>
+            <!--SLIDE SEEN/NOTSEEN-->
         <div class="item-actions">
-            <form action="/index.php" method="POST">
+            <form action="/index.php" method="GET">
                 <label class="switch">
                     <input 
                         type="checkbox" 
@@ -101,6 +102,17 @@ $movies = getMovies($pdo);
                 <input type="hidden" name="id" value="<?= $item['id'] ?>">
                 <input type="hidden" name="action" value="toggle">
             </form>
+            <!-- EDIT -->
+                <a href="/edit.php?id=<?= $item['id'] ?>" class="edit-btn">Edit</a>
+
+
+            <!-- DELETE-->
+            <form action="/index.php" method="GET">
+                <input type="hidden" name="id" value="<?= $item['id'] ?>">
+                <input type="hidden" name="action" value="delete">
+                <button type="submit" class="delete-btm">Delete</button>
+            </form>
+
         </div>
     </li>
 <?php endforeach; ?>
