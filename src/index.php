@@ -1,32 +1,40 @@
 <?php
 require 'crud-functions.php';
 
-// Handle actions: add, delete, toggle, etc.
+// Handle form submission for adding a movie
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action']) && $_GET['action'] === 'add') {
-    $namn = $_POST['namn'];
-    $typ = $_POST['typ'];
-    $genre = $_POST['genre'];
+    $namn = $_POST['namn'] ?? null;
+    $typ = $_POST['typ'] ?? null;
+    $genre = $_POST['genre'] ?? null;
 
-    addMovie($pdo, $namn, $typ, $genre);
-
-   
+    if ($namn && $typ && $genre) {
+        addMovie($pdo, $namn, $typ, $genre);
+        header("Location: /index.php"); // Redirect to avoid resubmission
+        exit;
+    }
 }
 
+// Handle actions for delete and toggle
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
     $action = $_GET['action'];
     $id = $_GET['id'] ?? null;
 
-    if ($action === 'delete' && $id) {
-        deleteMovie($pdo, $id);
-    }
+    if ($id && is_numeric($id)) {
+        if ($action === 'delete') {
+            deleteMovie($pdo, $id);
+            header("Location: /index.php"); // Redirect after deletion
+            exit;
+        }
 
-    if ($action === 'toggle' && $id) {
-        toggleMovieSeen($pdo, $id);
+        if ($action === 'toggle') {
+            toggleMovieSeen($pdo, $id);
+            header("Location: /index.php"); // Redirect after toggling
+            exit;
+        }
     }
-
-    
 }
 
+// Fetch all movies to display
 $movies = getMovies($pdo);
 ?>
 
@@ -73,26 +81,30 @@ $movies = getMovies($pdo);
             <h2>List</h2>
             
             <ul>
-                <?php foreach ($movies as $item): ?>
-                    <li>
-                        <div class="item-details">
-                            <strong><?= htmlspecialchars($item['name']) ?></strong>
-                            <div>(<?= htmlspecialchars($item['type']) ?> - <?= htmlspecialchars($item['genre']) ?>)</div>
-                            <div>Status: <?= $item['seen'] ? 'Seen' : 'Not seen' ?></div>
-                        </div>
-                        <div class="item-actions">
-                            <label class="switch">
-                                <a href="/index.php?action=toggle&id=<?= $item['id'] ?>">Seen</a>
-                                <input type="checkbox">
-                                <span class="slider"></span>
+            <?php foreach ($movies as $item): ?>
+    <li>
+        <div class="item-details">
+            <strong><?= htmlspecialchars($item['name']) ?></strong>
+            <div>(<?= htmlspecialchars($item['type']) ?> - <?= htmlspecialchars($item['genre']) ?>)</div>
+            <div>Status: <?= $item['seen'] ? 'Seen' : 'Not seen' ?></div>
+        </div>
+        <div class="item-actions">
+            <form action="/index.php" method="POST">
+                <label class="switch">
+                    <input 
+                        type="checkbox" 
+                        name="seen" 
+                        onchange="this.form.submit()" 
+                        <?= $item['seen'] ? 'checked' : '' ?>>
+                    <span class="slider"></span>
+                </label>
+                <input type="hidden" name="id" value="<?= $item['id'] ?>">
+                <input type="hidden" name="action" value="toggle">
+            </form>
+        </div>
+    </li>
+<?php endforeach; ?>
 
-                            </label>
-                            <a href="/edit.php?action=update&id=<?= $item['id'] ?>">Edit</a>
-                            
-                            <a href="/index.php?action=delete&id=<?= $item['id'] ?>">Delete</a>
-                        </div>
-                    </li>
-                <?php endforeach; ?>
             </ul>
         </div>
     </div>
