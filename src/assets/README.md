@@ -23,7 +23,7 @@ This site is for you that are researching alot of series and or movies and want 
 
 
 #### Figma ####
- [![GET IT ON](https://gist.github.com/cxmeel/0dbc95191f239b631c3874f4ccf114e2/raw/figma_blue-compact.svg)](https://www.figma.com/proto/sUkx6qQcZKm3SRwoWq8tUV/U03---TODO-LIST?node-id=0-1&t=cXyTPyP4E3QLD335-1)
+ [![GET IT ON](https://gist.github.com/cxmeel/0dbc95191f239b631c3874f4ccf114e2/raw/figma_blue)](https://www.figma.com/proto/sUkx6qQcZKm3SRwoWq8tUV/U03---TODO-LIST?node-id=0-1&t=cXyTPyP4E3QLD335-1)
  
  [![GET IT ON](https://gist.github.com/cxmeel/0dbc95191f239b631c3874f4ccf114e2/raw/figma_green-compact.svg)](https://www.figma.com/design/sUkx6qQcZKm3SRwoWq8tUV/U03---TODO-LIST?node-id=0-1&t=cXyTPyP4E3QLD335-1)
 
