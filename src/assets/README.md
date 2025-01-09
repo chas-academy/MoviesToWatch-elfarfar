@@ -22,6 +22,6 @@ Tip!: If you seen the movie, press on the toggle to see it turn green and also t
 
 
 ### Figma ###
- [PROTOTYPE] (https://www.figma.com/proto/sUkx6qQcZKm3SRwoWq8tUV/U03---TODO-LIST?node-id=0-1&t=cXyTPyP4E3QLD335-1)
- [DESIGN] (https://www.figma.com/design/sUkx6qQcZKm3SRwoWq8tUV/U03---TODO-LIST?node-id=0-1&t=cXyTPyP4E3QLD335-1)
+ [PROTOTYPE](https://www.figma.com/proto/sUkx6qQcZKm3SRwoWq8tUV/U03---TODO-LIST?node-id=0-1&t=cXyTPyP4E3QLD335-1)
+ [DESIGN](https://www.figma.com/design/sUkx6qQcZKm3SRwoWq8tUV/U03---TODO-LIST?node-id=0-1&t=cXyTPyP4E3QLD335-1)
 
