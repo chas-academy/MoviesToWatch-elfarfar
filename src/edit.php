@@ -3,25 +3,32 @@ require 'crud-functions.php';
 
 $action = $_GET['action'] ?? null;
 $id = $_GET['id'] ?? null;
+$movieToEdit = null;
 
 if ($action && $id) {
     switch ($action) {
         case 'update':
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $namn = $_POST['name'];
-                $typ = $_POST['type'];
-                $genre = $_POST['genre'];
+                // form submission
+                $namn = $_POST['name'] ?? null;
+                $typ = $_POST['type'] ?? null;
+                $genre = $_POST['genre'] ?? null;
 
-                updateMovie($pdo, $id, $namn, $typ, $genre);
-                header("Location: /index.php");
-                exit;
+                if ($namn && $typ && $genre) {
+                    updateMovie($pdo, $id, $namn, $typ, $genre);
+                    header("Location: /index.php");
+                    exit;
+                } else {
+                    die("All fields are required.");
+                }
             } else {
+                // Fetch movie to edit
                 $query = $pdo->prepare("SELECT * FROM movies WHERE id = ?");
                 $query->execute([$id]);
-                $movie = $query->fetch(PDO::FETCH_ASSOC);
+                $movieToEdit = $query->fetch(PDO::FETCH_ASSOC);
 
-                if (!$movie) {
-                    die("Movie not found");
+                if (!$movieToEdit) {
+                    die("Movie not found.");
                 }
             }
             break;

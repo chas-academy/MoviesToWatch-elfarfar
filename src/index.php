@@ -103,7 +103,18 @@ $movies = getMovies($pdo);
                 <input type="hidden" name="action" value="toggle">
             </form>
             <!-- EDIT -->
-                <a href="/edit.php?id=<?= $item['id'] ?>" class="edit-btn">Edit</a>
+            <form action="/index.php?action=update&id=5" method="POST">
+            <select name="genre" required>
+                            <option value="Action">Action</option>
+                            <option value="Comedy">Comedy</option>
+                            <option value="Adventure">Adventure</option>
+                            <option value="Horror">Horror</option>
+                            <option value="Documentary">Documentary</option>
+                            <option value="War">War</option>
+                        </select>
+    <button type="submit">Edit</button>
+</form>
+
 
 
             <!-- DELETE-->
