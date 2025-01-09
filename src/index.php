@@ -3,7 +3,7 @@ require 'crud-functions.php';
 
 $action = $_GET['action'] ?? null;
 $id = $_GET['id'] ?? null;
-$movieToEdit = null; // Initialize once to avoid "undefined variable" warnings
+$movieToEdit = null; 
 
 
 
@@ -89,7 +89,7 @@ $movies = getMovies($pdo);
                 <h1>Movies To Watch</h1>
                 <div class="main__form">
                     <form action="/index.php?action=add" method="post">
-                        <input type="text" name="namn" placeholder="Name" required>
+                        <input type="text" name="namn" placeholder="Movie/series title" required>
                         <select name="typ" required>
                             <option value="Movie">Movie</option>
                             <option value="Series">Series</option>
@@ -150,29 +150,31 @@ $movies = getMovies($pdo);
 </ul>
 <!-- Edit Movie Form - Show When $movieToEdit is Available -->
 <?php if ($movieToEdit): ?>
-    <h2>Edit Movie: <?= htmlspecialchars($movieToEdit['name']) ?></h2>
-    <form action="/index.php?action=update&id=<?= $movieToEdit['id'] ?>" method="POST">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" value="<?= htmlspecialchars($movieToEdit['name']) ?>" required>
-        
-        <label for="type">Type:</label>
-        <select name="type" required> 
-            <option value="Movie" <?= $movieToEdit['type'] === 'Movie' ? 'selected' : '' ?>>Movie</option>
-            <option value="Series" <?= $movieToEdit['type'] === 'Series' ? 'selected' : '' ?>>Series</option>
-        </select>
-
-        <label for="genre">Genre:</label>
-        <select name="genre" required>
-            <option value="Action" <?= $movieToEdit['genre'] === 'Action' ? 'selected' : '' ?>>Action</option>
-            <option value="Comedy" <?= $movieToEdit['genre'] === 'Comedy' ? 'selected' : '' ?>>Comedy</option>
+        <div class="main__form">
+            <h2>Edit: <?= htmlspecialchars($movieToEdit['name']) ?></h2>
+            <form action="/index.php?action=update&id=<?= $movieToEdit['id'] ?>" method="POST">
+                <input type="text" id="name" name="name" placeholder="Name" value="<?= htmlspecialchars($movieToEdit['name']) ?>" required>
+                <label for="type"></label>
+                <select name="type" required> 
+                    <option value="Movie" <?= $movieToEdit['type'] === 'Movie' ? 'selected' : '' ?>>Movie</option>
+                    <option value="Series" <?= $movieToEdit['type'] === 'Series' ? 'selected' : '' ?>>Series</option>
+                </select>
+                
+                <label for="genre"></label>
+                <select name="genre" required>
+                    <option value="Action" <?= $movieToEdit['genre'] === 'Action' ? 'selected' : '' ?>>Action</option>
+                    <option value="Comedy" <?= $movieToEdit['genre'] === 'Comedy' ? 'selected' : '' ?>>Comedy</option>
             <option value="Adventure" <?= $movieToEdit['genre'] === 'Adventure' ? 'selected' : '' ?>>Adventure</option>
             <option value="Horror" <?= $movieToEdit['genre'] === 'Horror' ? 'selected' : '' ?>>Horror</option>
             <option value="Documentary" <?= $movieToEdit['genre'] === 'Documentary' ? 'selected' : '' ?>>Documentary</option>
             <option value="War" <?= $movieToEdit['genre'] === 'War' ? 'selected' : '' ?>>War</option>
         </select>
         
-        <button type="submit">Save</button>
+        <button type="submit" class="edit-btn">Save</button>
     </form>
+   </div>
+ 
+
 <?php endif; ?>
         </div>
     </div>
