@@ -1,5 +1,3 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/5k4uDUDX)
-
 # Welcome to my Todo project: **Movies To Watch** #
 
 This site is for you that are researching alot of series and or movies and want to write it down somewhere so you not forgetting too watch it. Simply list different movies or series you come by.
@@ -17,11 +15,11 @@ This site is for you that are researching alot of series and or movies and want 
 - If you want to delete one of the Movies/Series  just press `DELETE`
 
 ## The project ##
-### Draw.IO ER-Diagram ###
+#### Draw.IO ER-Diagram ####
 
 
 
-### Figma ###
- - [![PROTOTYPE](https://www.figma.com/proto/sUkx6qQcZKm3SRwoWq8tUV/U03---TODO-LIST?node-id=0-1&t=cXyTPyP4E3QLD335-1)]
- - [![DESIGN](https://www.figma.com/design/sUkx6qQcZKm3SRwoWq8tUV/U03---TODO-LIST?node-id=0-1&t=cXyTPyP4E3QLD335-1)]
+#### Figma ####
+ - [![PROTOTYPE](https://gist.github.com/cxmeel/0dbc95191f239b631c3874f4ccf114e2/raw/figma_purple-icon.svg)](https://www.figma.com/proto/sUkx6qQcZKm3SRwoWq8tUV/U03---TODO-LIST?node-id=0-1&t=cXyTPyP4E3QLD335-1)
+ - [![DESIGN](https://gist.github.com/cxmeel/0dbc95191f239b631c3874f4ccf114e2/raw/figma_green-icon.svg)](https://www.figma.com/design/sUkx6qQcZKm3SRwoWq8tUV/U03---TODO-LIST?node-id=0-1&t=cXyTPyP4E3QLD335-1)
 
