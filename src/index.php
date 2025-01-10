@@ -1,6 +1,7 @@
 <?php
 require 'crud-functions.php';
 
+
 $action = $_GET['action'] ?? null;
 $id = $_GET['id'] ?? null;
 $movieToEdit = null;

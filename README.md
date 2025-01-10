@@ -1,5 +1,3 @@
-
-
 # Welcome to my Todo project: **Movies To Watch** #
 
 This site is for you that are researching alot of series and or movies and want to write it down somewhere so you not forgetting too watch it. Simply list different movies or series you come by.
@@ -18,8 +16,8 @@ This site is for you that are researching alot of series and or movies and want 
 - If you want to delete one of the Movies/Series  just press `DELETE`
 
 ## The project ##
-#### Draw.IO ER-Diagram ####
-
+#### ER-Diagram ####
+[Click here](https://ibb.co/SfLZ2mS)
 
 
 #### Figma ####
