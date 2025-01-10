@@ -3,7 +3,7 @@ require 'crud-functions.php';
 
 $action = $_GET['action'] ?? null;
 $id = $_GET['id'] ?? null;
-$movieToEdit = null; 
+$movieToEdit = null;
 
 
 
@@ -12,10 +12,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action']) && $_GET['ac
     $namn = $_POST['namn'] ?? null;
     $typ = $_POST['typ'] ?? null;
     $genre = $_POST['genre'] ?? null;
-    
+
     if ($namn && $typ && $genre) {
         addMovie($pdo, $namn, $typ, $genre);
-        header("Location: /index.php");  
+        header("Location: /index.php");
         exit;
     }
 }
@@ -24,17 +24,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action']) && $_GET['ac
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
     $action = $_GET['action'];
     $id = $_GET['id'] ?? null;
-    
+
     if ($id && is_numeric($id)) {
         if ($action === 'delete') {
             deleteMovie($pdo, $id);
-            header("Location: /index.php"); 
+            header("Location: /index.php");
             exit;
         }
-        
+
         if ($action === 'toggle') {
             toggleMovieSeen($pdo, $id);
-            header("Location: /index.php"); 
+            header("Location: /index.php");
             exit;
         }
     }
@@ -42,14 +42,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
 
 if ($action === 'update' && $id) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        // Handle form submission 
+        // Handle form submission
         $namn = $_POST['name'] ?? null;
         $typ = $_POST['type'] ?? null;
         $genre = $_POST['genre'] ?? null;
 
         if ($namn && $typ && $genre) {
             updateMovie($pdo, $id, $namn, $typ, $genre);
-            header("Location: /index.php");  
+            header("Location: /index.php");
             exit;
         } else {
             die("Please fill in all fields.");
@@ -65,7 +65,7 @@ if ($action === 'update' && $id) {
         }
     }
 }
-// Fetch all movies to display
+// Fetch to display
 $movies = getMovies($pdo);
 ?>
 
@@ -113,7 +113,7 @@ $movies = getMovies($pdo);
             <h2>List</h2>
             
             <ul>
-    <?php foreach ($movies as $item): ?>
+    <?php foreach ($movies as $item) : ?>
         <li>
             <div class="item-details">
                 <strong><?= htmlspecialchars($item['name']) ?></strong>
@@ -149,7 +149,7 @@ $movies = getMovies($pdo);
 
 </ul>
 <!-- Edit Movie Form - Show When $movieToEdit is Available -->
-<?php if ($movieToEdit): ?>
+<?php if ($movieToEdit) : ?>
         <div class="main__form">
             <h2>Edit: <?= htmlspecialchars($movieToEdit['name']) ?></h2>
             <form action="/index.php?action=update&id=<?= $movieToEdit['id'] ?>" method="POST">

@@ -1,9 +1,9 @@
 <?php
 
-$host = 'mariadb'; 
-$db = 'todo_list'; 
-$user = 'root'; 
-$pass = 'mariadb'; 
+$host = 'mariadb';
+$db = 'todo_list';
+$user = 'root';
+$pass = 'mariadb';
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
@@ -15,8 +15,6 @@ $options = [
 
 try {
     $pdo = new PDO($dsn, $user, $pass, $options);
-    
 } catch (\PDOException $e) {
     die("Kunde inte ansluta till databasen: " . $e->getMessage());
 }
-?>
