@@ -1,11 +1,12 @@
 <?php
 
-$host = 'mariadb';
-$db = 'todo_list';
-$user = 'root';
-$pass = 'mariadb';
+$host = 'mariadb';  // Använd din Render MariaDB-tjänst, t.ex. 'mariadb' eller 'mysql' om du använder MySQL
+$db = 'todo_list';  // Namnet på din databas
+$user = 'root';  // Användarens namn för databasen
+$pass = 'mariadb';  // Lösenordet för användaren
 $charset = 'utf8mb4';
 
+// Skapa DSN för att ansluta till databasen
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 $options = [
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
@@ -14,7 +15,12 @@ $options = [
 ];
 
 try {
+    // Skapa en ny PDO-instans för anslutning
     $pdo = new PDO($dsn, $user, $pass, $options);
+    echo "Connected successfully";  // Om anslutningen lyckades
 } catch (\PDOException $e) {
-    die("Kunde inte ansluta till databasen: " . $e->getMessage());
+    // Fångar eventuella fel vid anslutning
+    throw new \PDOException($e->getMessage(), (int)$e->getCode());
 }
+
+?>
