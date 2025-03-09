@@ -17,6 +17,6 @@ ENV PATH="/root/.composer/vendor/bin:${PATH}"
 WORKDIR /var/www/html/
 
 # Copy application code into the container
-COPY ./src /var/www/html/src
+COPY ./src /var/www/html/
 RUN chmod -R a+r /var/www/html/src
 
