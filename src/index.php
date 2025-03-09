@@ -73,7 +73,7 @@ $movies = getMovies($pdo);
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="/public/style.css?v=1.6">
+    <link rel="stylesheet" href="../public/style.css">
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

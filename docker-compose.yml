@@ -10,29 +10,39 @@ services:
     environment:
       - compose=true
     depends_on:
-      - mariadb  # Säkerställer att PHP väntar på MariaDB innan den startar
-  
+      - mariadb
+    networks:
+      - app-network
+
   mariadb:
     image: mariadb:latest
     container_name: mariadb
     restart: always
     environment:
-      MYSQL_USER: root  # Ändra användarnamnet till root om du vill använda root
-      MYSQL_PASSWORD: mariadb  # Använd samma lösenord som i PHP-koden
-      MYSQL_DATABASE: todo_list  # Ändra till "todo_list" istället för "moviestodo"
-      MARIADB_ROOT_PASSWORD: mariadb  # Root-lösenordet för MariaDB
+      MYSQL_USER: root
+      MYSQL_PASSWORD: mariadb
+      MYSQL_DATABASE: todo_list
+      MARIADB_ROOT_PASSWORD: mariadb
     ports:
-      - 3306:3306  # MariaDB-porten
+      - 3306:3306
     volumes:
-      - mariadb_data:/var/lib/mysql  # Persistent datalagring för MariaDB
-      - ./src/seed:/docker-entrypoint-initdb.d/  # Om du har SQL-skript för att skapa databasen eller fylla den med data
-  
+      - mariadb_data:/var/lib/mysql
+      - ./src/seed:/docker-entrypoint-initdb.d/
+    networks:
+      - app-network
+
   adminer:
     image: adminer:latest
     container_name: adminer
     restart: always
     ports:
-      - 8080:8080  # Adminer för att hantera databasen via en webbläsare
+      - 8080:8080
+    networks:
+      - app-network
 
 volumes:
   mariadb_data:
+
+networks:
+  app-network:
+    driver: bridge
