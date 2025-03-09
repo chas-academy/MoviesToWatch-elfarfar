@@ -14,9 +14,9 @@ RUN composer global require squizlabs/php_codesniffer --no-progress --no-suggest
 ENV PATH="/root/.composer/vendor/bin:${PATH}"
 
 # Set the working directory to the src folder
-WORKDIR /var/www/html/
+WORKDIR /var/www/html/src
+
 
 # Copy application code into the container
 COPY ./src /var/www/html/
-RUN chmod -R a+r /var/www/html/src
 
