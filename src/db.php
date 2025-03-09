@@ -1,6 +1,6 @@
 <?php
 
-$host = 'mariadb';  // Använd din Render MariaDB-tjänst, t.ex. 'mariadb' eller 'mysql' om du använder MySQL
+$host = 'dpg-cv6tmmrqf0us73f6d0a0-a';  // Använd din Render MariaDB-tjänst, t.ex. 'mariadb' eller 'mysql' om du använder MySQL
 $db = 'todo_list';  // Namnet på din databas
 $user = 'root';  // Användarens namn för databasen
 $pass = 'mariadb';  // Lösenordet för användaren
