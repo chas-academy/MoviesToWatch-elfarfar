@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "name": "Conjuring Universe",
+        "type": "Movie",
+        "genre": "Action",
+        "seen": false
+    },
+    {
+        "id": 2,
+        "name": "Planet Earth II ",
+        "type": "Movie",
+        "genre": "Action",
+        "seen": false
+    },
+    {
+        "id": 3,
+        "name": "The boys",
+        "type": "Movie",
+        "genre": "Horror",
+        "seen": false
+    }
+]

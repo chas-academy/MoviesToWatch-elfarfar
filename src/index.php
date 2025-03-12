@@ -53,17 +53,21 @@ $movies = getMovies();
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movies To Watch</title>
 </head>
+
 <body>
     <div class="main">
         <div class="main__container">
             <h1>Movies To Watch</h1>
-            <form action="/index.php?action=add" method="post">
+
+            <!-- Movie addition form -->
+            <form action="/index.php?action=add" method="post" class="main__form">
                 <input type="text" name="namn" placeholder="Movie/series title" required>
                 <select name="typ" required>
                     <option value="Movie">Movie</option>
@@ -80,39 +84,46 @@ $movies = getMovies();
                 <button type="submit">Add Movie</button>
             </form>
         </div>
-        
+
+        <!-- Movie list -->
         <div class="list">
-            <h2>List</h2>
-            <ul>
-                <?php foreach ($movies as $item) : ?>
-                    <li>
-                        <div class="item-details">
-                            <strong><?= htmlspecialchars($item['name']) ?></strong>
-                            <div>(<?= htmlspecialchars($item['type']) ?> - <?= htmlspecialchars($item['genre']) ?>)</div>
-                            <div>Status: <?= $item['seen'] ? 'Seen' : 'Not seen' ?></div>
-                        </div>
-                        <div class="item-actions">
-                            <form action="/index.php" method="GET">
-                                <label class="switch">
-                                    <input type="checkbox" name="seen" onchange="this.form.submit()" <?= $item['seen'] ? 'checked' : '' ?>>
-                                    <span class="slider"></span>
-                                </label>
-                                <input type="hidden" name="id" value="<?= $item['id'] ?>">
-                                <input type="hidden" name="action" value="toggle">
-                            </form>
-                            <a href="/index.php?action=update&id=<?= $item['id'] ?>">
-                                <button type="submit">Edit</button>
-                            </a>
-                            <form action="/index.php" method="GET">
-                                <input type="hidden" name="id" value="<?= $item['id'] ?>">
-                                <input type="hidden" name="action" value="delete">
-                                <button type="submit">Delete</button>
-                            </form>
-                        </div>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
+            <div class="list__container">
+                <div class="list__content">
+                    <h2>List</h2>
+                    <ul>
+                        <?php foreach ($movies as $item) : ?>
+                            <li>
+                                <div class="item-details">
+                                    <strong><?= htmlspecialchars($item['name']) ?></strong>
+                                    <div>(<?= htmlspecialchars($item['type']) ?> - <?= htmlspecialchars($item['genre']) ?>)</div>
+                                    <div>Status: <?= $item['seen'] ? 'Seen' : 'Not seen' ?></div>
+                                </div>
+                                <div class="item-actions">
+                                    <form action="/index.php" method="GET">
+                                        <label class="switch">
+                                            <input type="checkbox" name="seen" onchange="this.form.submit()" <?= $item['seen'] ? 'checked' : '' ?>>
+                                            <span class="slider"></span>
+                                        </label>
+                                        <input type="hidden" name="id" value="<?= $item['id'] ?>">
+                                        <input type="hidden" name="action" value="toggle">
+                                    </form>
+                                    <a href="/index.php?action=update&id=<?= $item['id'] ?>">
+                                        <button type="button" class="edit-btn">Edit</button>
+                                    </a>
+                                    <form action="/index.php" method="GET">
+                                        <input type="hidden" name="id" value="<?= $item['id'] ?>">
+                                        <input type="hidden" name="action" value="delete">
+                                        <button type="submit" class="delete-btn">Delete</button>
+                                    </form>
+                                </div>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
+
 </body>
+
 </html>
