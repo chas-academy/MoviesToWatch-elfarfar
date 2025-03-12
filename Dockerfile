@@ -23,8 +23,3 @@ EXPOSE 80
 # Set the command to run Apache in the foreground
 CMD ["apache2ctl", "-D", "FOREGROUND"]
 
-WORKDIR /var/www/html
-COPY ./public /var/www/html
-COPY ./src /var/www/html/src
-
-RUN echo "DocumentRoot /var/www/html/public" >> /etc/apache2/apache2.conf
