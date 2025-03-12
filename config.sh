@@ -8,3 +8,4 @@ else
     # Run the tests
     exec phpunit --testdox tests
 fi
+
