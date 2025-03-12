@@ -18,3 +18,6 @@ EXPOSE 80
 
 # Start Apache in the foreground to keep the container running
 CMD ["apache2ctl", "-D", "FOREGROUND"]
+
+# Copy your custom Apache config file
+COPY ./config/000-default.conf /etc/apache2/sites-available/000-default.conf
