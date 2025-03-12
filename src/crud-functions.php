@@ -1,39 +1,63 @@
 <?php
 
-require 'db.php';
+define('MOVIE_FILE', 'movies.json');
 
-
-function getMovies($pdo)
-{
-    $query = $pdo->query("SELECT * FROM movies ORDER BY id DESC");
-    return $query->fetchAll(PDO::FETCH_ASSOC);
+function getMovies() {
+    if (!file_exists(MOVIE_FILE)) {
+        return [];
+    }
+    $json = file_get_contents(MOVIE_FILE);
+    return json_decode($json, true) ?? [];
 }
 
-
-function addMovie($pdo, $namn, $typ, $genre)
-{
-    $query = $pdo->prepare("INSERT INTO movies (name, type, genre) VALUES (?, ?, ?)");
-    $query->execute([$namn, $typ, $genre]);
+function saveMovies($movies) {
+    file_put_contents(MOVIE_FILE, json_encode($movies, JSON_PRETTY_PRINT));
 }
 
-
-function updateMovie($pdo, $id, $name, $type, $genre)
-{
-    $query = $pdo->prepare("UPDATE movies SET name = ?, type = ?, genre = ? WHERE id = ?");
-    return $query->execute([$name, $type, $genre, $id]);
+function addMovie($namn, $typ, $genre) {
+    $movies = getMovies();
+    $id = count($movies) + 1;
+    $movies[] = ['id' => $id, 'name' => $namn, 'type' => $typ, 'genre' => $genre, 'seen' => false];
+    saveMovies($movies);
 }
 
-
-
-function deleteMovie($pdo, $id)
-{
-    $query = $pdo->prepare("DELETE FROM movies WHERE id = ?");
-    $query->execute([$id]);
+function getMovieById($id) {
+    $movies = getMovies();
+    foreach ($movies as $movie) {
+        if ($movie['id'] == $id) {
+            return $movie;
+        }
+    }
+    return null;
 }
 
+function updateMovie($id, $name, $type, $genre) {
+    $movies = getMovies();
+    foreach ($movies as &$movie) {
+        if ($movie['id'] == $id) {
+            $movie['name'] = $name;
+            $movie['type'] = $type;
+            $movie['genre'] = $genre;
+            saveMovies($movies);
+            return true;
+        }
+    }
+    return false;
+}
 
-function toggleMovieSeen($pdo, $id)
-{
-    $query = $pdo->prepare("UPDATE movies SET seen = !seen WHERE id = ?");
-    $query->execute([$id]);
+function deleteMovie($id) {
+    $movies = getMovies();
+    $movies = array_filter($movies, fn($movie) => $movie['id'] != $id);
+    saveMovies(array_values($movies));
+}
+
+function toggleMovieSeen($id) {
+    $movies = getMovies();
+    foreach ($movies as &$movie) {
+        if ($movie['id'] == $id) {
+            $movie['seen'] = !$movie['seen'];
+            saveMovies($movies);
+            return;
+        }
+    }
 }

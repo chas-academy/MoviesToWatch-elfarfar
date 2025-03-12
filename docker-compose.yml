@@ -1,48 +1,7 @@
 services:
   php:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    build: .
     ports:
-      - 80:80
+      - "80:80"
     volumes:
-      - ./src:/var/www/html
-    environment:
-      - compose=true
-    depends_on:
-      - mariadb
-    networks:
-      - app-network
-
-  mariadb:
-    image: mariadb:latest
-    container_name: mariadb
-    restart: always
-    environment:
-      MYSQL_USER: root
-      MYSQL_PASSWORD: mariadb
-      MYSQL_DATABASE: todo_list
-      MARIADB_ROOT_PASSWORD: mariadb
-    ports:
-      - 3306:3306
-    volumes:
-      - mariadb_data:/var/lib/mysql
-      - ./src/seed:/docker-entrypoint-initdb.d/
-    networks:
-      - app-network
-
-  adminer:
-    image: adminer:latest
-    container_name: adminer
-    restart: always
-    ports:
-      - 8080:8080
-    networks:
-      - app-network
-
-volumes:
-  mariadb_data:
-
-networks:
-  app-network:
-    driver: bridge
+      - .:/var/www/html
