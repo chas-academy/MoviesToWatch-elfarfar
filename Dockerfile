@@ -24,4 +24,4 @@ EXPOSE 80
 CMD ["apache2ctl", "-D", "FOREGROUND"]
 
 # Ensure SQLite database exists and is writable
-RUN touch /var/www/html/src/movies.sqlite && chmod 777 /var/www/html/src/movies.sqlite
+RUN touch /var/www/html/movies.sqlite && chmod 777 /var/www/html/movies.sqlite
