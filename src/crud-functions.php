@@ -1,6 +1,7 @@
 <?php
 
-define('DB_FILE', __DIR__ . '/movies.sqlite');
+define('DB_FILE', __DIR__ . '/src/movies.sqlite');
+
 
 function connectDB() {
     try {

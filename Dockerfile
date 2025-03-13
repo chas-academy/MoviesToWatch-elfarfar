@@ -5,6 +5,9 @@ RUN apt-get update && apt-get install -y \
     libsqlite3-dev \
     && docker-php-ext-install pdo pdo_sqlite
 
+# Create /src directory if it doesn't exist
+RUN mkdir -p /var/www/html/src && chmod -R 777 /var/www/html/src
+
 # Copy the custom Apache config file
 COPY ./config/000-default.conf /etc/apache2/sites-available/000-default.conf
 
@@ -24,4 +27,4 @@ EXPOSE 80
 CMD ["apache2ctl", "-D", "FOREGROUND"]
 
 # Ensure SQLite database exists and is writable
-RUN touch /var/www/html/movies.sqlite && chmod 777 /var/www/html/movies.sqlite
+RUN touch /var/www/html/src/movies.sqlite && chmod 777 /var/www/html/src/movies.sqlite
