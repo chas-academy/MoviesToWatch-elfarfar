@@ -23,3 +23,5 @@ EXPOSE 80
 # Set the command to run Apache in the foreground
 CMD ["apache2ctl", "-D", "FOREGROUND"]
 
+# Ensure SQLite database exists and is writable
+RUN touch /var/www/html/src/movies.sqlite && chmod 777 /var/www/html/src/movies.sqlite

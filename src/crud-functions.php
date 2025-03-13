@@ -1,63 +1,71 @@
 <?php
 
-define('MOVIE_FILE', 'movies.json');
+define('DB_FILE', __DIR__ . '/movies.sqlite');
 
+function connectDB() {
+    try {
+        $pdo = new PDO("sqlite:" . DB_FILE);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        return $pdo;
+    } catch (PDOException $e) {
+        die("Database connection failed: " . $e->getMessage());
+    }
+}
+
+// Ensure the movies table exists
+function initializeDB() {
+    $db = connectDB();
+    $db->exec("CREATE TABLE IF NOT EXISTS movies (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        type TEXT NOT NULL,
+        genre TEXT NOT NULL,
+        seen INTEGER DEFAULT 0
+    )");
+}
+
+// Fetch all movies
 function getMovies() {
-    if (!file_exists(MOVIE_FILE)) {
-        return [];
-    }
-    $json = file_get_contents(MOVIE_FILE);
-    return json_decode($json, true) ?? [];
+    $db = connectDB();
+    $stmt = $db->query("SELECT * FROM movies");
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function saveMovies($movies) {
-    file_put_contents(MOVIE_FILE, json_encode($movies, JSON_PRETTY_PRINT));
+// Add a new movie
+function addMovie($name, $type, $genre) {
+    $db = connectDB();
+    $stmt = $db->prepare("INSERT INTO movies (name, type, genre, seen) VALUES (?, ?, ?, 0)");
+    $stmt->execute([$name, $type, $genre]);
 }
 
-function addMovie($namn, $typ, $genre) {
-    $movies = getMovies();
-    $id = count($movies) + 1;
-    $movies[] = ['id' => $id, 'name' => $namn, 'type' => $typ, 'genre' => $genre, 'seen' => false];
-    saveMovies($movies);
-}
-
+// Get a movie by ID
 function getMovieById($id) {
-    $movies = getMovies();
-    foreach ($movies as $movie) {
-        if ($movie['id'] == $id) {
-            return $movie;
-        }
-    }
-    return null;
+    $db = connectDB();
+    $stmt = $db->prepare("SELECT * FROM movies WHERE id = ?");
+    $stmt->execute([$id]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
+// Update a movie
 function updateMovie($id, $name, $type, $genre) {
-    $movies = getMovies();
-    foreach ($movies as &$movie) {
-        if ($movie['id'] == $id) {
-            $movie['name'] = $name;
-            $movie['type'] = $type;
-            $movie['genre'] = $genre;
-            saveMovies($movies);
-            return true;
-        }
-    }
-    return false;
+    $db = connectDB();
+    $stmt = $db->prepare("UPDATE movies SET name = ?, type = ?, genre = ? WHERE id = ?");
+    return $stmt->execute([$name, $type, $genre, $id]);
 }
 
+// Delete a movie
 function deleteMovie($id) {
-    $movies = getMovies();
-    $movies = array_filter($movies, fn($movie) => $movie['id'] != $id);
-    saveMovies(array_values($movies));
+    $db = connectDB();
+    $stmt = $db->prepare("DELETE FROM movies WHERE id = ?");
+    return $stmt->execute([$id]);
 }
 
+// Toggle "seen" status
 function toggleMovieSeen($id) {
-    $movies = getMovies();
-    foreach ($movies as &$movie) {
-        if ($movie['id'] == $id) {
-            $movie['seen'] = !$movie['seen'];
-            saveMovies($movies);
-            return;
-        }
-    }
+    $db = connectDB();
+    $stmt = $db->prepare("UPDATE movies SET seen = NOT seen WHERE id = ?");
+    return $stmt->execute([$id]);
 }
+
+// Initialize the database if not already set up
+initializeDB();
